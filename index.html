@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <script type="text/javascript">
+    function computerPlay() {
+      let n = Math.floor(Math.random() * 3 + 1);
+      if (n === 1) {
+        return "rock";
+      } else if (n === 2) {
+        return "paper";
+      } else {
+        return "scissors";
+      }
+    }
+
+    function playRound(playerSelection, computer) {
+      let choice = playerSelection.toLowerCase();
+      let opponent = computer();
+
+      if (choice !== "rock" && choice !== "scissors" && choice !== "paper") {
+        return "wrong input";
+      }
+
+      if (choice === opponent) {
+        return "draw";
+      } else if (choice === "rock" && opponent === "paper") {
+        return "you lose";
+      } else if (choice === "paper" && opponent === "scissors") {
+        return "you lose";
+      } else if (choice === "scissors" && opponent === "rock") {
+        return "you lose";
+      } else {
+        return "you win";
+      }
+    }
+
+    function game() {
+      let playerScore = 0;
+      let computerScore = 0;
+
+      for (let i = 0; i < 5; i++) {
+        let result = playRound(prompt(), computerPlay);
+        if (result === "you lose") {
+          computerScore++;
+        } else if (result === "you win") {
+          playerScore++;
+        } else if (result === "wrong input") {
+          computerScore++;
+        } else {
+          // do nothing
+        }
+        console.log(result);
+      }
+
+      console.log(whoWins(playerScore, computerScore));
+    }
+
+    function whoWins(playerScore, computerScore) {
+      console.log("player: " + playerScore +"/tcomputer: " + computerScore);
+      if (playerScore > computerScore) {
+        return "player wins!";
+      } else if (playerScore < computerScore) {
+        return "computer wins!";
+      } else {
+        return "it's a draw.";
+      }
+    }
+
+  </script>
+</html>
